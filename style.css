@@ -1,0 +1,16 @@
+/* fonts */
+
+body {
+    background-color: #A1A0E0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    background-color: #fff;
+    padding: 25px;
+    width: 550px;
+    border-radius: 15px;
+}
