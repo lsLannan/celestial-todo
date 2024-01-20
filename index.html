@@ -15,11 +15,18 @@
             <div class="todo-header">
                 <h2>TODO <i class="fa-solid fa-moon"></i></h2>
                 <!--<img src="" height="50px">-->
-                <div class="todo-body">
-                    <input type="text">
-                    <img src="plus-sign.png" alt="+" id="addUpdate" onclick="createToDoItem();"> 
-                </div>
             </div>
+
+            <div class="todo-body">
+                <input type="text" id="todoText" class="todo-input" placeholder="Add a task">
+                <img src="plus-sign.png" alt="+" id="addUpdate" onclick="createToDoItem();"> 
+            </div>
+
+            <h5 id="Alert"></h5>
+            <ul id="list-items" class="list-items">
+                <!--blank-->
+            </ul>
+
         </div>
         <script src="script.js" async defer></script>
     </body>
