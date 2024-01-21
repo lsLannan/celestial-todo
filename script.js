@@ -32,7 +32,8 @@ function createToDoItem() {
         });
 
         if (isPresent) {
-            setAlertMessage("This task is already in the list!");
+            //setAlertMessage("This task is already in the list!");
+            alert("This task is already in the list!");
             return;
         }
 
@@ -52,6 +53,77 @@ function createToDoItem() {
         setLocalStorage();
 
         todoValue.value = "";
-        setAlertMessage("Task created!");
+        //setAlertMessage("Task created!");
+        alert("Task Created!");
     }
+}
+
+// read function 
+// read data from local storage, show in todo list 
+
+function ReadToDoItems() {
+    todo.forEach((element) => {
+        let li = document.createElement("li");
+        let style = "";
+
+        if (element.status) {
+            style = "style='text-decoration: line-through'";
+        }
+        const todoItems = `<div ${style} title="Double click to cross off!" ondblclick="CompletedToDoItems(this)">${
+            element.item
+        }
+        ${
+            style === "" 
+            ? "" 
+            : '<img class="todo-controls" src="images/check-mark.png" />'
+        }</div><div>
+        ${
+            style === "" 
+            ? '<img src="edit todo-controls" onclick="UpdateToDoItems(this)" src="images/pencil.png" />'
+            : ""
+        }
+        <img class="delete todo-controls" onclick="DeleteToDoItems(this)" src="images/delete.png" /></div></div>`;
+        li.innerHTML = todoItems;
+        listItems.appendChild(li);
+    });
+}
+ReadToDoItems();
+
+// update function 
+function UpdateToDoItems(e) {
+    if (e.parentElement.parentElement.querySelector("div").style.text.textDecoration === "") {
+        todoValue.value = e.parentElement.parentElement.querySelector("div").innerText;
+        updateText = e.parentElement.parentElement.querySelector("div");
+        addUpdate.setAttribute("onclick", "UpdateOnSelectionItems()");
+        addUpdate.setAttribute("src", "images/refresh.png");
+        todoValue.focus();
+    }
+}
+
+function UpdateOnSelectionItems() {
+    let isPresent = false;
+
+    todo.forEach((element) => {
+        if (element.item == todoValue.value) {
+            isPresent = true;
+        }
+    });
+
+    if (isPresent) {
+        alert("Task is already in list!");
+        return;
+    }
+
+    todo.forEach((element) => {
+        if (element.item == updateText.innerText.trim()) {
+            element.item = todoValue.value;
+        }
+    });
+    setLocalStorage();
+
+    updateText.innerText = todoValue.value;
+    addUpdate.setAttribute("onclick", "CreateToDoItems()");
+    addUpdate.setAttribute("src", "images/plus-sign.png");
+    todoValue.value = "";
+    alert("Todo task updated!");
 }
