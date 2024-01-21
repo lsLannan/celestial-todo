@@ -39,8 +39,8 @@ function createToDoItem() {
         let li = document.createElement("li");
 
         const todoItems = `<div title="Hit Double Click and Complete" ondblclick="CompletedToDoItems(this)">${todoValue.value}</div><div>
-                        <img class="edit todo-controls" onclick="UpdateToDoItems(this)" src="/images/pencil.png" />
-                        <img class="delete todo-controls" onclick="DeleteToDoItems(this)" src="/images/delete.png" /></div></div>`;
+                        <img class="edit todo-controls" onclick="UpdateToDoItems(this)" src="images/pencil.png" alt="pencil"/>
+                        <img class="delete todo-controls" onclick="DeleteToDoItems(this)" src="images/delete.png" /></div></div>`;
         li.innerHTML = todoItems;
         listItems.appendChild(li);
 
