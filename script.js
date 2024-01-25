@@ -153,7 +153,7 @@ function DeleteToDoItems(e) {
 // completed, changes status of tasks once completed
 function CompletedToDoItems(e) {
     if (e.parentElement.querySelector("div").style.textDecoration === "") {
-        const img = document.createElement(img);
+        const img = document.createElement("img");
         img.src = "images/check-mark.png"
         img.className = "todo-controls";
 
