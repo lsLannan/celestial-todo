@@ -32,8 +32,8 @@ function createToDoItem() {
         });
 
         if (isPresent) {
-            //setAlertMessage("This task is already in the list!");
-            alert("This task is already in the list!");
+            setAlertMessage("This task is already in the list!");
+            //alert("This task is already in the list!");
             return;
         }
 
@@ -53,8 +53,8 @@ function createToDoItem() {
         setLocalStorage();
 
         todoValue.value = "";
-        //setAlertMessage("Task created!");
-        alert("Task Created!");
+        setAlertMessage("Task created!");
+        //alert("Task Created!");
     }
 }
 
@@ -110,7 +110,7 @@ function UpdateOnSelectionItems() {
     });
 
     if (isPresent) {
-        alert("Task is already in list!");
+        setAlertMessage("Task is already in list!");
         return;
     }
 
@@ -125,5 +125,47 @@ function UpdateOnSelectionItems() {
     addUpdate.setAttribute("onclick", "CreateToDoItems()");
     addUpdate.setAttribute("src", "images/plus-sign.png");
     todoValue.value = "";
-    alert("Todo task updated!");
+    setAlertMessage("Todo task updated!");
+}
+
+// delete tasks
+function DeleteToDoItems(e) {
+    let deleteValue = e.parentElement.parentElement.querySelector("div").innerText;
+
+    if (confirm(`Are you sure you want to delete ${deleteValue}?`)) {
+        e.parentElement.parentElement.setAttribute("class", "deleted-item");
+        todoValue.focus();
+
+        todo.forEach((element) => {
+            if (element.item == deleteValue.trim()) {
+                todo.splice(element, 1);
+            }
+        });
+
+        setTimeout(() => {
+            e.parentElement.parentElement.remove();
+        }, 1000);
+
+        setLocalStorage();
+    }
+}
+
+// completed
+function CompletedToDoItems(e) {
+    
+}
+
+
+// set local storage
+function setLocalStorage() {
+    localStorage.setItem("todo-list", JSON.stringify(todo));
+}
+
+// alert message function
+function setAlertMessage(message) {
+    todoAlert.removeAttribute("class");
+    todoAlert.innerText = message;
+    setTimeout(() => {
+        todoAlert.classList.add("toggleMe");
+    }, 1000);
 }
