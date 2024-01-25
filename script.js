@@ -79,7 +79,7 @@ function ReadToDoItems() {
         }</div><div>
         ${
             style === "" 
-            ? '<img src="edit todo-controls" onclick="UpdateToDoItems(this)" src="images/pencil.png" />'
+            ? '<img class="edit todo-controls" onclick="UpdateToDoItems(this)" src="images/pencil.png" />'
             : ""
         }
         <img class="delete todo-controls" onclick="DeleteToDoItems(this)" src="images/delete.png" /></div></div>`;
@@ -150,9 +150,25 @@ function DeleteToDoItems(e) {
     }
 }
 
-// completed
+// completed, changes status of tasks once completed
 function CompletedToDoItems(e) {
-    
+    if (e.parentElement.querySelector("div").style.textDecoration === "") {
+        const img = document.createElement(img);
+        img.src = "images/check-mark.png"
+        img.className = "todo-controls";
+
+        e.parentElement.querySelector("div").style.textDecoration = "line-through";
+        e.parentElement.querySelector("div").appendChild(img);
+        e.parentElement.querySelector("img.edit").remove();
+
+        todo.forEach((element) => {
+            if (e.parentElement.querySelector("div").innerText.trim() == element.item) {
+                element.status = true;
+            }
+        });
+        setLocalStorage();
+        setAlertMessage("Todo task completed!");
+    }
 }
 
 
