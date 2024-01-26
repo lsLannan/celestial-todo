@@ -2,7 +2,7 @@
 const todoValue = document.getElementById("todoText");
 const todoAlert = document.getElementById("Alert");
 const listItems = document.getElementById("list-items");
-const addUpdate = document.getElementById("addUpdate");
+const addUpdate = document.getElementById("addUpdateClick");
 
 // declare local storage object
 let todo = JSON.parse(localStorage.getItem("todo-list"));
@@ -91,7 +91,7 @@ ReadToDoItems();
 
 // update function 
 function UpdateToDoItems(e) {
-    if (e.parentElement.parentElement.querySelector("div").style.text.textDecoration === "") {
+    if (e.parentElement.parentElement.querySelector("div").style.textDecoration === "") {
         todoValue.value = e.parentElement.parentElement.querySelector("div").innerText;
         updateText = e.parentElement.parentElement.querySelector("div");
         addUpdate.setAttribute("onclick", "UpdateOnSelectionItems()");
@@ -122,11 +122,12 @@ function UpdateOnSelectionItems() {
     setLocalStorage();
 
     updateText.innerText = todoValue.value;
-    addUpdate.setAttribute("onclick", "CreateToDoItems()");
+    addUpdate.setAttribute("onclick", "createToDoItems()");
     addUpdate.setAttribute("src", "images/plus-sign.png");
     todoValue.value = "";
     setAlertMessage("Todo task updated!");
 }
+
 
 // delete tasks
 function DeleteToDoItems(e) {
