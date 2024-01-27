@@ -14,7 +14,7 @@ if (!todo) {
 // CRUD Functions
 
 // Create function 
-function createToDoItem() {
+function createToDoItems() {
     // check if user has entered task
     if (todoValue.value === "") {
         todoAlert.innerText = "Please enter task!";
